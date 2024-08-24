@@ -1,231 +1,480 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
+          font-family: Arial, sans-serif;
+          background-color: #f0f0f0;
+          margin: 0;
+          padding: 0;
         }
-
+  
         .gallery {
-            max-width: 1000px;
-            margin: 2rem auto;
-            display: flex;
-            flex-wrap: nowrap;
-            gap: 1rem;
-            overflow-x: auto;
+          max-width: 1000px;
+          margin: 2rem auto;
+          display: flex;
+          flex-wrap: nowrap;
+          gap: 1rem;
+          overflow-x: auto;
         }
-
+  
         .gallery-panel {
-            flex: 1 1 200px;
-            border-radius: 0.75rem;
-            overflow: hidden;
-            cursor: pointer;
-            transition: flex 0.5s ease-in-out;
-            background: #ffffff;
-            padding: 1rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            height: 450px;
-            position: relative;
-            border: 2px solid #ddd;
-            border-color: #007BFF; /* Add a border color */
+          flex: 1 1 200px;
+          border-radius: 0.75rem;
+          overflow: hidden;
+          cursor: pointer;
+          transition: flex 0.5s ease-in-out;
+          background: #ffffff;
+          padding: 1rem;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          height: 450px;
+          position: relative;
+          border: 2px solid #ddd;
+          border-color: #007bff; /* Add a border color */
         }
-
+  
         .gallery-panel:hover {
-            flex: 1 1 400px;
-            border-color: #0056b3; /* Darker border color on hover */
+          flex: 1 1 400px;
+          border-color: #0056b3; /* Darker border color on hover */
         }
-
+  
         .cover-page {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #007BFF; /* Cover page background color */
-            color: #ffffff; /* Cover page text color */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            transition: opacity 0.5s ease;
-            opacity: 1;
-            z-index: 1;
-            padding: 1rem;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: #007bff; /* Cover page background color */
+          color: #ffffff; /* Cover page text color */
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          transition: opacity 0.5s ease;
+          opacity: 1;
+          z-index: 1;
+          padding: 1rem;
+          pointer-events: none; /* Prevents interaction when input is needed */
         }
-
+  
         .gallery-panel:hover .cover-page {
-            opacity: 0;
+          opacity: 0;
+          pointer-events: none; /* Ensures input fields are accessible */
         }
-
+  
         .form-content {
-            position: relative;
-            z-index: 0;
-            height: 100%;
-            padding: 1rem;
+          position: relative;
+          z-index: 0;
+          height: 100%;
+          padding: 1rem;
         }
-
+  
         .form-content form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
         }
-
+  
         .form-content label {
-            margin-top: 0.5rem;
-            font-size: 1rem;
-            color: #333;
+          margin-top: 0.5rem;
+          font-size: 1rem;
+          color: #333;
         }
-
-        .form-content input, 
-        .form-content select, 
+  
+        .form-content select,
         .form-content textarea {
-            padding: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 0.25rem;
-            width: 100%;
-            box-sizing: border-box;
+          padding: 0.5rem;
+          border: 1px solid #ddd;
+          border-radius: 0.25rem;
+          width: 100%;
+          box-sizing: border-box;
         }
-
-        .form-content input:focus, 
-        .form-content select:focus, 
+  
+        .form-content select:focus,
         .form-content textarea:focus {
-            border-color: #007BFF;
-            outline: none;
+          border-color: #007bff;
+          outline: none;
         }
-
+  
         .form-content textarea {
-            resize: vertical;
+          resize: vertical;
         }
-
+  
         .form-content h2 {
-            margin-bottom: 0.5rem;
-            color: #007BFF;
-            font-size: 1.5rem;
+          margin-bottom: 0.5rem;
+          color: #007bff;
+          font-size: 1.5rem;
         }
+  
+        /* From Uiverse.io by JkHuger */
+        .rainbow-hover {
+          font-size: 16px;
+          font-weight: 700;
+          color: #ff7576;
+          background-color: #2b3044;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          padding: 12px 24px;
+          position: relative;
+          line-height: 24px;
+          border-radius: 9px;
+          box-shadow: 0px 1px 2px #2b3044, 0px 4px 16px #2b3044;
+          transform-style: preserve-3d;
+          transform: scale(var(--s, 1)) perspective(600px)
+            rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+          perspective: 600px;
+          transition: transform 0.1s;
+        }
+  
+        .sp {
+          background: linear-gradient(
+            90deg,
+            #866ee7,
+            #ea60da,
+            #ed8f57,
+            #fbd41d,
+            #2cca91
+          );
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          text-fill-color: transparent;
+          display: block;
+        }
+  
+        .rainbow-hover:active {
+          transition: 0.3s;
+          transform: scale(0.93);
+        }
+  
+        /* From Uiverse.io by mrhyddenn */
+        .form__group {
+          position: relative;
+          padding: 20px 0 0;
+          width: 100%;
+          max-width: 180px;
+        }
+  
+        .form__field {
+          font-family: inherit;
+          width: 100%;
+          border: none;
+          border-bottom: 2px solid #9b9b9b;
+          outline: 0;
+          font-size: 17px;
+          color: #333;
+          padding: 7px 0;
+          background: transparent;
+          transition: border-color 0.2s;
+        }
+  
+        .form__field::placeholder {
+          color: transparent;
+        }
+  
+        .form__field:placeholder-shown ~ .form__label {
+          font-size: 17px;
+          cursor: text;
+          top: 20px;
+        }
+  
+        .form__label {
+          position: absolute;
+          top: 0;
+          display: block;
+          transition: 0.2s;
+          font-size: 17px;
+          color: #9b9b9b;
+          pointer-events: none; /* Prevents interaction */
+        }
+  
+        .form__field:focus {
+          padding-bottom: 6px;
+          font-weight: 700;
+          border-width: 3px;
+          border-image: linear-gradient(to right, #116399, #38caef);
+          border-image-slice: 1;
+        }
+  
+        .form__field:focus ~ .form__label {
+          position: absolute;
+          top: 0;
+          display: block;
+          transition: 0.2s;
+          font-size: 17px;
+          color: #38caef;
+          font-weight: 700;
+        }
+  
+        /* reset input */
+        .form__field:required,
+        .form__field:invalid {
+          box-shadow: none;
+        }
+      </style>
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="gallery">
         <!-- Basic Information Panel -->
         <div class="gallery-panel">
-            <div class="cover-page">
-                <div>
-                    <h2>Basic Information</h2>
-                    <p>Enter your full name, gender, date of birth, contact details, and current address.</p>
-                </div>
+          <div class="cover-page">
+            <div>
+              <h2>Basic Information</h2>
+              <p>
+                Enter your full name, gender, date of birth, contact details, and
+                current address.
+              </p>
             </div>
-            <div class="form-content">
-                <form action="">
-                    <h2>Basic Information</h2>
-                    <label for="fullName">Full Name:</label>
-                    <input type="text" id="fullName" name="fullName" required>
-
-                    <label for="gender">Gender:</label>
-                    <select id="gender" name="gender" required>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
-
-                    <label for="dob">Date of Birth:</label>
-                    <input type="date" id="dob" name="dob" required>
-
-                    <label for="phone">Phone Number:</label>
-                    <input type="tel" id="phone" name="phone" required>
-
-                    <label for="email">Email Address:</label>
-                    <input type="email" id="email" name="email" required>
-
-                    <label for="address">Current Address:</label>
-                    <textarea id="address" name="address" rows="3" required></textarea>
-                </form>
-            </div>
+          </div>
+          <div class="form-content">
+            <form action="">
+              <h2>Basic Information</h2>
+              <div class="form__group field">
+                <input
+                  type="input"
+                  class="form__field"
+                  placeholder="Full Name"
+                  id="fullName"
+                  name="fullName"
+                  required
+                />
+                <label for="fullName" class="form__label">Full Name</label>
+              </div>
+  
+              <label for="gender">Gender:</label>
+              <select id="gender" name="gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+  
+              <label for="dob">Date of Birth:</label>
+              <input type="date" id="dob" name="dob" required />
+  
+              <div class="form__group field">
+                <input
+                  type="input"
+                  class="form__field"
+                  placeholder="Phone Number"
+                  id="phone"
+                  name="phone"
+                  required
+                />
+                <label for="phone" class="form__label">Phone Number</label>
+              </div>
+  
+              <div class="form__group field">
+                <input
+                  type="input"
+                  class="form__field"
+                  placeholder="Email Address"
+                  id="email"
+                  name="email"
+                  required
+                />
+                <label for="email" class="form__label">Email Address</label>
+              </div>
+  
+              <label for="address">Current Address:</label>
+              <textarea id="address" name="address" rows="3" required></textarea>
+            </form>
+          </div>
         </div>
-
+  
         <!-- Educational Background Panel -->
         <div class="gallery-panel">
-            <div class="cover-page">
-                <div>
-                    <h2>Educational Background</h2>
-                    <p>Provide information about your institution, degrees earned, graduation year, and major.</p>
-                </div>
+          <div class="cover-page">
+            <div>
+              <h2>Educational Background</h2>
+              <p>
+                Provide information about your institution, degrees earned,
+                graduation year, and major.
+              </p>
             </div>
-            <div class="form-content">
-                <form action="">
-                    <h2>Educational Background</h2>
-                    <label for="institution">Institution Name:</label>
-                    <input type="text" id="institution" name="institution" required>
-
-                    <label for="degree">Degree(s) Earned:</label>
-                    <input type="text" id="degree" name="degree" required>
-
-                    <label for="gradYear">Graduation Year:</label>
-                    <input type="number" id="gradYear" name="gradYear" required>
-
-                    <label for="major">Major/Field of Study:</label>
-                    <input type="text" id="major" name="major" required>
-
-                    <label for="achievementsEdu">Achievements and Honors:</label>
-                    <textarea id="achievementsEdu" name="achievements" rows="3"></textarea>
-                </form>
-            </div>
+          </div>
+          <div class="form-content">
+            <form action="">
+              <h2>Educational Background</h2>
+              <div class="form__group field">
+                <input
+                  type="input"
+                  class="form__field"
+                  placeholder="Institution"
+                  id="institution"
+                  name="institution"
+                  required
+                />
+                <label for="institution" class="form__label">Institution</label>
+              </div>
+  
+              <div class="form__group field">
+                <input
+                  type="input"
+                  class="form__field"
+                  placeholder="Degree"
+                  id="degree"
+                  name="degree"
+                  required
+                />
+                <label for="degree" class="form__label">Degree</label>
+              </div>
+  
+              <div class="form__group field">
+                <input
+                  type="input"
+                  class="form__field"
+                  placeholder="Graduation Year"
+                  id="gradYear"
+                  name="gradYear"
+                  required
+                />
+                <label for="gradYear" class="form__label">Graduation Year</label>
+              </div>
+  
+              <div class="form__group field">
+                <input
+                  type="input"
+                  class="form__field"
+                  placeholder="Major"
+                  id="major"
+                  name="major"
+                  required
+                />
+                <label for="major" class="form__label">Major</label>
+              </div>
+            </form>
+          </div>
         </div>
-
-        <!-- Professional Information Panel -->
+  
+        <!-- Work Experience Panel -->
         <div class="gallery-panel">
-            <div class="cover-page">
-                <div>
-                    <h2>Professional Information</h2>
-                    <p>Enter your current employer, job title, industry, and work experience.</p>
-                </div>
+          <div class="cover-page">
+            <div>
+              <h2>Work Experience</h2>
+              <p>
+                List your work experiences, including job titles, companies,
+                employment dates, and responsibilities.
+              </p>
             </div>
-            <div class="form-content">
-                <form action="">
-                    <h2>Professional Information</h2>
-                    <label for="employer">Current Employer/Organization:</label>
-                    <input type="text" id="employer" name="employer" required>
-
-                    <label for="jobTitle">Job Title/Role:</label>
-                    <input type="text" id="jobTitle" name="jobTitle" required>
-
-                    <label for="industry">Professional Field/Industry:</label>
-                    <input type="text" id="industry" name="industry" required>
-
-                    <label for="experience">Work Experience:</label>
-                    <textarea id="experience" name="experience" rows="3"></textarea>
-                </form>
-            </div>
+          </div>
+          <div class="form-content">
+            <form action="">
+              <h2>Work Experience</h2>
+              <div class="form__group field">
+                <input
+                  type="input"
+                  class="form__field"
+                  placeholder="Job Title"
+                  id="jobTitle"
+                  name="jobTitle"
+                  required
+                />
+                <label for="jobTitle" class="form__label">Job Title</label>
+              </div>
+  
+              <div class="form__group field">
+                <input
+                  type="input"
+                  class="form__field"
+                  placeholder="Company"
+                  id="company"
+                  name="company"
+                  required
+                />
+                <label for="company" class="form__label">Company</label>
+              </div>
+  
+              <!-- <div class="form__group field">
+                <input
+                  type="input"
+                  class="form__field"
+                  placeholder="Employment Dates"
+                  id="employmentDates"
+                  name="employmentDates"
+                  required
+                />
+                <label for="employmentDates" class="form__label"
+                  >Employment Dates</label
+                >
+              </div> -->
+  
+              <label for="responsibilities">Responsibilities:</label>
+              <textarea
+                id="responsibilities"
+                name="responsibilities"
+                rows="3"
+                required
+              ></textarea>
+            </form>
+          </div>
         </div>
-
-        <!-- Skills and Expertise Panel -->
+  
+        <!-- Skills Panel -->
         <div class="gallery-panel">
-            <div class="cover-page">
-                <div>
-                    <h2>Skills and Expertise</h2>
-                    <p>List your key skills, certifications, and languages spoken.</p>
-                </div>
+          <div class="cover-page">
+            <div>
+              <h2>Skills</h2>
+              <p>
+                Outline your technical skills, software proficiencies, and other
+                relevant competencies.
+              </p>
             </div>
-            <div class="form-content">
-                <form action="">
-                    <h2>Skills and Expertise</h2>
-                    <label for="skills">Key Skills:</label>
-                    <input type="text" id="skills" name="skills" required>
-
-                    <label for="certifications">Certifications and Licenses:</label>
-                    <input type="text" id="certifications" name="certifications">
-
-                    <label for="languages">Languages Spoken:</label>
-                    <input type="text" id="languages" name="languages">
-                </form>
-            </div>
+          </div>
+          <div class="form-content">
+            <form action="">
+              <h2>Skills</h2>
+              <div class="form__group field">
+                <input
+                  type="input"
+                  class="form__field"
+                  placeholder="Technical Skills"
+                  id="techSkills"
+                  name="techSkills"
+                  required
+                />
+                <label for="techSkills" class="form__label"
+                  >Technical Skills</label
+                >
+              </div>
+  
+              <div class="form__group field">
+                <input
+                  type="input"
+                  class="form__field"
+                  placeholder="Software Proficiency"
+                  id="software"
+                  name="software"
+                  required
+                />
+                <label for="software" class="form__label"
+                  >Software Proficiency</label
+                >
+              </div>
+  
+              <div class="form__group field">
+                <input
+                  type="input"
+                  class="form__field"
+                  placeholder="Other Skills"
+                  id="otherSkills"
+                  name="otherSkills"
+                  required
+                />
+                <label for="otherSkills" class="form__label">Other Skills</label>
+              </div>
+              <br />
+              <button data-label="Register" class="rainbow-hover">
+                <span class="sp">Register</span>
+              </button>
+            </form>
+          </div>
         </div>
-<!--         
+      <!--         
         <div class="gallery-panel">
             <div class="form-legend">Networking and Community Engagement</div>
             <form action="">
@@ -292,5 +541,5 @@
             </form>
         </div> -->
     </div>
-</body>
+  </body>
 </html>
