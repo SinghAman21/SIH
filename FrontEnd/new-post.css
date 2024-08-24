@@ -72,7 +72,7 @@
   .preview {
     margin-top: 20px;
     text-align: center;
-    max-height: 300px;
+    max-height:fit-content;
     overflow: hidden;
   }
   

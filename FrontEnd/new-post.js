@@ -12,14 +12,14 @@ document.getElementById('file-upload').addEventListener('change', function(event
         const img = document.createElement('img');
         img.src = URL.createObjectURL(file);
         img.style.maxWidth = '100%';
-        img.style.maxHeight = '300px';
+        img.style.maxHeight = '500px';
         previewContainer.appendChild(img);
       } else if (validVideoTypes.includes(fileType)) {
         const video = document.createElement('video');
         video.src = URL.createObjectURL(file);
         video.controls = true;
         video.style.maxWidth = '100%';
-        video.style.maxHeight = '300px';
+        video.style.maxHeight = '500px';
         previewContainer.appendChild(video);
       } else {
         previewContainer.innerHTML = 'Unsupported file type!';
