@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile</title>
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
         body {
           font-family: Arial, sans-serif;
           background-color: #f0f0f0;
@@ -22,6 +23,7 @@
         }
   
         .gallery-panel {
+          font-family: "Playfair Display", serif;
           flex: 1 1 200px;
           border-radius: 0.75rem;
           overflow: hidden;
@@ -34,6 +36,8 @@
           position: relative;
           border: 2px solid #ddd;
           border-color: #007bff; /* Add a border color */
+          overflow-y: scroll; /* or 'auto' */
+          scrollbar-width: none; /* Firefox */
         }
   
         .gallery-panel:hover {
