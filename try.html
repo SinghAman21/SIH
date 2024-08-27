@@ -1,474 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      margin: 0;
-      padding: 0;
-    }
 
-    .gallery {
-      max-width: 1000px;
-      margin: 2rem auto;
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 1rem;
-      overflow-x: auto;
-    }
+<head>
+    <title>Toast Notifications</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
 
-    .gallery-panel {
-      font-family: "Playfair Display", serif;
-      flex: 1 1 200px;
-      border-radius: 0.75rem;
-      overflow: hidden;
-      cursor: pointer;
-      transition: flex 0.5s ease-in-out;
-      background: #ffffff;
-      padding: 1rem;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      height: 450px;
-      position: relative;
-      border: 2px solid #ddd;
-      border-color: #007bff; /* Add a border color */
-      overflow-y: scroll; /* or 'auto' */
-      scrollbar-width: none; /* Firefox */
-    }
+        body {
+            background: #f7edff;
+        }
 
-    .gallery-panel:hover {
-      flex: 1 1 400px;
-      border-color: #0056b3; /* Darker border color on hover */
-    }
+        .buttons {
+            margin: 50px;
+        }
 
-    .cover-page {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #007bff; /* Cover page background color */
-      color: #ffffff; /* Cover page text color */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      transition: opacity 0.5s ease;
-      opacity: 1;
-      z-index: 1;
-      padding: 1rem;
-      pointer-events: none; /* Prevents interaction when input is needed */
-    }
+        .buttons button {
+            background-color: #333;
+            color: #fff;
+            border: 0;
+            outline: 0;
+            width: 180px;
+            height: 40px;
+            margin: 5px;
+            cursor: pointer;
+        }
 
-    .gallery-panel:hover .cover-page {
-      opacity: 0;
-      pointer-events: none; /* Ensures input fields are accessible */
-    }
+        #toastBox {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            align-items: flex-end;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 20px;
+        }
 
-    .form-content {
-      position: relative;
-      z-index: 0;
-      height: 100%;
-      padding: 1rem;
-    }
+        .toast {
+            width: 400px;
+            height: 80px;
+            background-color: #fff;
+            font-weight: 500;
+            margin: 15px 0;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            position: relative;
+            transform: translateX(100%);
+            animation: moveleft 0.3s linear forwards;
+        }
 
-    .form-content form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
+        @keyframes moveleft {
+            100% {
+                transform: translateX(0%);
+            }
+        }
 
-    .form-content label {
-      margin-top: 0.5rem;
-      font-size: 1rem;
-      color: #333;
-    }
+        .toast i {
+            margin: 0px 20px;
+            font-size: 35px;
+            color: green;
+        }
 
-    .form-content select,
-    .form-content textarea {
-      padding: 0.5rem;
-      border: 1px solid #ddd;
-      border-radius: 0.25rem;
-      width: 100%;
-      box-sizing: border-box;
-    }
+        .toast.error i {
+            color: red;
+        }
 
-    .form-content select:focus,
-    .form-content textarea:focus {
-      border-color: #007bff;
-      outline: none;
-    }
+        .toast.invalid i {
+            color: orange;
+        }
 
-    .form-content textarea {
-      resize: vertical;
-    }
+        .toast.warning i {
+            color: yellow;
+        }
 
-    .form-content h2 {
-      margin-bottom: 0.5rem;
-      color: #007bff;
-      font-size: 1.5rem;
-    }
+        .toast::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 5px;
+            background: green;
+            animation: success 5s linear forwards;
+        }
 
-    /* From Uiverse.io by JkHuger */
-    .rainbow-hover {
-      font-size: 16px;
-      font-weight: 700;
-      color: #ff7576;
-      background-color: #2b3044;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      padding: 12px 24px;
-      position: relative;
-      line-height: 24px;
-      border-radius: 9px;
-      box-shadow: 0px 1px 2px #2b3044, 0px 4px 16px #2b3044;
-      transform-style: preserve-3d;
-      transform: scale(var(--s, 1)) perspective(600px) rotateX(var(--rx, 0deg))
-        rotateY(var(--ry, 0deg));
-      perspective: 600px;
-      transition: transform 0.1s;
-    }
+        @keyframes success {
+            100% {
+                width: 0;
+            }
+        }
 
-    .sp {
-      background: linear-gradient(
-        90deg,
-        #866ee7,
-        #ea60da,
-        #ed8f57,
-        #fbd41d,
-        #2cca91
-      );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      /* text-fill-color: transparent; */
-      display: block;
-    }
+        .toast.error::after {
+            background: red;
+        }
 
-    .rainbow-hover:active {
-      transition: 0.3s;
-      transform: scale(0.93);
-    }
+        .toast.invalid::after {
+            background: orange;
+        }
 
-    /* From Uiverse.io by mrhyddenn */
-    .form__group {
-      position: relative;
-      padding: 20px 0 0;
-      width: 100%;
-      max-width: 180px;
-    }
+        .toast.warning::after {
+            background: yellow;
+        }
+    </style>
+</head>
 
-    .form__field {
-      font-family: inherit;
-      width: 100%;
-      border: none;
-      border-bottom: 2px solid #9b9b9b;
-      outline: 0;
-      font-size: 17px;
-      color: #333;
-      padding: 7px 0;
-      background: transparent;
-      transition: border-color 0.2s;
-    }
-
-    .form__field::placeholder {
-      color: transparent;
-    }
-
-    .form__field:placeholder-shown ~ .form__label {
-      font-size: 17px;
-      cursor: text;
-      top: 20px;
-    }
-
-    .form__label {
-      display: block;
-      transition: 0.2s;
-      font-size: 17px;
-      color: #9b9b9b;
-      pointer-events: none; /* Prevents interaction */
-    }
-
-    .form__field:focus {
-      position: relative;
-      top: 0.3rem;
-      padding-bottom: 6px;
-      font-weight: 700;
-      border-width: 3px;
-      border-image: linear-gradient(to right, #116399, #38caef);
-      border-image-slice: 1;
-    }
-
-    .form__field:focus ~ .form__label {
-      position: absolute;
-      top: 0;
-      display: block;
-      transition: 0.2s;
-      font-size: 17px;
-      color: #38caef;
-      font-weight: 700;
-    }
-
-    /* reset input */
-    .form__field:required,
-    .form__field:invalid {
-      box-shadow: none;
-    }
-
-    /* From Uiverse.io by ClawHack1 */
-    /* Genel stil */
-    .toggle-switch {
-      position: relative;
-      display: inline-block;
-      width: 40px;
-      height: 24px;
-      margin: 10px;
-    }
-
-    /* Giriş stil */
-    .toggle-switch .toggle-input {
-      display: none;
-    }
-
-    /* Anahtarın stilinin etrafındaki etiketin stil */
-    .toggle-switch .toggle-label {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 40px;
-      height: 24px;
-      background-color: #2196f3;
-      border-radius: 34px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    /* Anahtarın yuvarlak kısmının stil */
-    .toggle-switch .toggle-label::before {
-      content: "";
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      top: 2px;
-      left: 2px;
-      background-color: #fff;
-      box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s;
-    }
-
-    /* Anahtarın etkin hale gelmesindeki stil değişiklikleri */
-    .toggle-switch .toggle-input:checked + .toggle-label {
-      background-color: #4caf50;
-    }
-
-    .toggle-switch .toggle-input:checked + .toggle-label::before {
-      transform: translateX(16px);
-    }
-
-    /* Light tema */
-    .toggle-switch.light .toggle-label {
-      background-color: #bebebe;
-    }
-
-    .toggle-switch.light .toggle-input:checked + .toggle-label {
-      background-color: #9b9b9b;
-    }
-
-    .toggle-switch.light .toggle-input:checked + .toggle-label::before {
-      transform: translateX(6px);
-    }
-
-    /* Dark tema */
-    .toggle-switch.dark .toggle-label {
-      background-color: #4b4b4b;
-    }
-
-    .toggle-switch.dark .toggle-input:checked + .toggle-label {
-      background-color: #717171;
-    }
-
-    .toggle-switch.dark .toggle-input:checked + .toggle-label::before {
-      transform: translateX(16px);
-    }
-
-    .toggle-container {
-      display: inline-block
-    }
-
-    span.toggle-text {
-    position: relative;
-    top: -0.5rem;
-}
-  </style>
-  <body>
-    <div class="gallery-panel">
-      <div class="cover-page">
-        <div>
-          <h2>Educational Background</h2>
-          <p>
-            Provide information about your institution, degrees earned,
-            graduation year, and major.
-          </p>
-        </div>
-      </div>
-      <div class="form-content">
-        <form action="">
-          <h2>Educational Background</h2>
-
-          <div class="form__group field">
-            <label for="institution" class="form__label">Who are you?</label>
-
-            <div class="toggle-container">
-                <span class="toggle-text">Student</span>
-                <div class="toggle-switch">
-                  <input class="toggle-input" id="toggle" type="checkbox" />
-                  <label class="toggle-label" for="toggle"></label>
-                </div>
-                <span class="toggle-text">Alumni</span>
-            </div>
-              
-
-            <div class="form__group field">
-              <input
-                type="input"
-                class="form__field"
-                placeholder="Institution"
-                id="institute_name"
-                name="institution"
-                required
-              />
-              <label for="institution" class="form__label" style="position: absolute;">Institution</label>
-            </div>
-
-            <div class="form__group field">
-              <input
-                type="input"
-                class="form__field"
-                placeholder="Degree"
-                id="name_of_degree"
-                name="degree"
-                required
-              />
-              <label for="degree" class="form__label" style="position: absolute;">Degree</label>
-            </div>
-            
-            <div class="student" id="student">
-                <br>
-                <label for="year">Year:</label>
-              <select id="year" name="gender" required>
-                <option value="fe">First Year</option>
-                <option value="se">Second Year</option>
-                <option value="te">Third Year</option>
-                <option value="be">Fourth Year</option>
-              </select>
-            </div>
-
-            <div class="alumini" id ="alumni">
-            <div class="form__group field">
-              <input
-                type="input"
-                class="form__field"
-                placeholder="Graduation Year"
-                id="graduation_year"
-                name="gradYear"
-                required
-              />
-              <label for="gradYear" class="form__label" style="position: absolute;">Graduation Year</label>
-            </div>
-        </div>
-        <div class="form__group field">
-            <label for="major_field_of_study" class="form__label">Major:</label>
-            <select id="major_field_of_study" name="major" class="form__field" required>
-              <option value="cs_it">CS & IT</option>
-              <option value="mechanical">Mechanical</option>
-              <option value="electrical">Electrical</option>
-              <option value="civil">Civil</option>
-              <option value="other">Other</option>
-            </select>
-          
-            <div style="display: none;">
-              <input
-                type="text"
-                id="major_field_of_study"
-                name="other_major"
-                class="form__field"
-                placeholder="Enter your major"
-              />
-              <!-- <label for="other_major" class="form__label" style="position: absolute;">Other Major</label> -->
-            </div>
-          </div>
-            <br>
-          <input type="file" id="fileInput" accept="pdf" />
-    <button onclick="uploadPDF()">Upload PDF</button>
-  </form>
-      </div>
+<body>
+    <div class="buttons">
+        <button onclick="showToast(successMsg)">Changes Saved</button>
+        <button onclick="showToast(itemAddedMsg)">Item Added</button>
+        <button onclick="showToast(loginSuccessMsg)">Login Successful</button>
+        <button onclick="showToast(registrationCompleteMsg)">Registration Complete</button>
+        <button onclick="showToast(passwordUpdatedMsg)">Password Updated</button>
+        <button onclick="showToast(emailSentMsg)">Email Sent</button>
+        <button onclick="showToast(errMsg)">Error Occurred</button>
+        <button onclick="showToast(invalidCredentialsMsg)">Invalid Credentials</button>
+        <button onclick="showToast(formSubmissionFailedMsg)">Form Submission Failed</button>
+        <button onclick="showToast(networkErrorMsg)">Network Error</button>
+        <button onclick="showToast(accessDeniedMsg)">Access Denied</button>
+        <button onclick="showToast(fileUploadFailedMsg)">File Upload Failed</button>
+        <button onclick="showToast(unsavedChangesMsg)">Unsaved Changes</button>
+        <button onclick="showToast(sessionExpiringMsg)">Session Expiring</button>
+        <button onclick="showToast(passwordStrengthMsg)">Password Strength</button>
+        <button onclick="showToast(dataDeletionMsg)">Data Deletion</button>
     </div>
-  </body>
-  <script>
-    // Function to toggle between Student and Alumni content
-function toggleContent() {
-  const toggleInput = document.getElementById("toggle");
-  const studentDiv = document.getElementById("student");
-  const alumniDiv = document.getElementById("alumni");
+    <div id="toastBox"></div>
 
-  // Check if the toggle is checked
-  if (toggleInput.checked) {
-    // Show Alumni div and hide Student div
-    studentDiv.style.display = "none";
-    alumniDiv.style.display = "block";
-  } else {
-    // Show Student div and hide Alumni div
-    studentDiv.style.display = "block";
-    alumniDiv.style.display = "none";
-  }
-}
+    <script>
+        let toastBox = document.getElementById("toastBox");
 
-// Add event listener to the toggle switch
-document.getElementById("toggle").addEventListener("change", toggleContent);
+        // Success Messages
+        let successMsg = '<i class="fa-solid fa-square-check"></i> Changes Saved Successfully!';
+        let itemAddedMsg = '<i class="fa-solid fa-square-check"></i> Item Added!';
+        let loginSuccessMsg = '<i class="fa-solid fa-square-check"></i> Login Successful!';
+        let registrationCompleteMsg = '<i class="fa-solid fa-square-check"></i> Registration Complete!';
+        let passwordUpdatedMsg = '<i class="fa-solid fa-square-check"></i> Password Updated!';
+        let emailSentMsg = '<i class="fa-solid fa-square-check"></i> Email Sent!';
 
-// Initial check to set the correct div visibility
-toggleContent();
+        // Error Messages
+        let errMsg = '<i class="fa-solid fa-circle-exclamation"></i> Error Occurred!';
+        let invalidCredentialsMsg = '<i class="fa-solid fa-circle-exclamation"></i> Invalid Credentials!';
+        let formSubmissionFailedMsg = '<i class="fa-solid fa-circle-exclamation"></i> Form Submission Failed!';
+        let networkErrorMsg = '<i class="fa-solid fa-circle-exclamation"></i> Network Error!';
+        let accessDeniedMsg = '<i class="fa-solid fa-circle-exclamation"></i> Access Denied!';
+        let fileUploadFailedMsg = '<i class="fa-solid fa-circle-exclamation"></i> File Upload Failed!';
 
-const majorField = document.getElementById('major_field_of_study');
-  const otherMajorContainer = document.getElementById('other_major_container');
+        // Warning Messages
+        let unsavedChangesMsg = '<i class="fa-solid fa-triangle-exclamation"></i> Unsaved Changes!';
+        let sessionExpiringMsg = '<i class="fa-solid fa-triangle-exclamation"></i> Session Expiring!';
+        let passwordStrengthMsg = '<i class="fa-solid fa-triangle-exclamation"></i> Password Strength Weak!';
+        let dataDeletionMsg = '<i class="fa-solid fa-triangle-exclamation"></i> Confirm Data Deletion!';
 
-  // Add an event listener to detect changes in the dropdown
-  majorField.addEventListener('change', function () {
-    if (this.value === 'other') {
-      // Show the "Other" input field if "Other" is selected
-      otherMajorContainer.style.display = 'block';
-    } else {
-      // Hide the "Other" input field if "Other" is not selected
-      otherMajorContainer.style.display = 'none';
-    }
-  });
+        function showToast(msg) {
+            let toast = document.createElement("div");
+            toast.classList.add("toast");
+            toast.innerHTML = msg;
+            toastBox.appendChild(toast);
+            setTimeout(() => {
+                toast.remove();
+            }, 5000);
+            if (msg.includes("Error") || msg.includes("Failed") || msg.includes("Invalid") || msg.includes("Denied")) {
+                toast.classList.add("error");
+            }
+            if (msg.includes("Unsaved") || msg.includes("Session") || msg.includes("Password") || msg.includes("Deletion")) {
+                toast.classList.add("warning");
+            }
+        }
+    </script>
+</body>
 
-
-  function uploadPDF() {
-    const fileInput = document.getElementById('fileInput');
-    const file = fileInput.files[0];
-
-    if (file && file.type === 'application/pdf') {
-        const reader = new FileReader();
-
-        reader.onload = function(e) {
-            const base64String = e.target.result.split(',')[1]; // Extract base64 part
-            localStorage.setItem('uploadedPDF', base64String);
-            alert('PDF uploaded to local storage!');
-        };
-
-        reader.readAsDataURL(file);
-    } else {
-        alert('Please upload a valid PDF file.');
-    }
-}
-
-  </script>
 </html>

@@ -3,6 +3,10 @@ const unread = document.getElementById("notifes");
 const markAll = document.getElementById("mark_all");
 unread.innerText = unreadMessages.length;
 
+
+const goBack = () => {
+    window.history.back();
+  };
 // Function to calculate the time difference
 function timeAgo(time) {
     const now = new Date();

@@ -23,6 +23,20 @@ body {
   justify-content: center;
   background-color: var(--Very-light-grayish-blue);
 }
+
+.back-btn {
+  cursor: pointer;
+  height: 2rem;
+  width: 2rem;
+  /* border-radius: 50%; */
+  background-color: var(--Grayish-blue);
+  position: absolute;
+  top: 3rem;
+  left: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .container {
   margin: 2rem;
   width: 700px;
