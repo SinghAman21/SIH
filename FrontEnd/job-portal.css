@@ -1,0 +1,115 @@
+nav{
+    background-color: #021526;
+    z-index: 1;
+    color: white;
+}
+.logo{
+    background: #7FA1C3;
+    color: #021526;
+    border-radius: 50%;
+}
+.logo>h3{
+    padding: 5px;
+    font-size: 1.5rem;
+}
+form{
+    position: relative;
+    left: 100px;
+}
+.navbar-nav{
+    position: absolute;
+    left: 1000px;
+}
+.nav-item{
+    padding-left: 50px;
+    color: white;
+}
+.dropdown-menu{
+    grid: 1fr 1fr 1fr;
+}
+
+
+/* Hero Section */
+.hero {
+    background: #f4f4f4;
+    padding: 50px 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.hero button {
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.hero button:hover {
+    background: #0056b3;
+}
+
+/* Map Section */
+#map {
+    width: 100%;
+    height: 250px;
+    margin-top: 30px;
+}
+
+/* Featured Employers Section */
+.featured-employers {
+    padding: 50px 0;
+    background: #fff;
+    text-align: center;
+}
+
+.featured-employers h2 {
+    margin-bottom: 30px;
+    font-size: 36px;
+}
+
+.employer-cards {
+    display: flex;
+    justify-content: space-between;
+}
+
+.employer-cards .card {
+    background: #f4f4f4;
+    padding: 20px;
+    width: 30%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.employer-cards .card img {
+    max-width: 100px;
+    margin-bottom: 20px;
+}
+
+.employer-cards .card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.employer-cards .card p {
+    margin-bottom: 20px;
+}
+
+.employer-cards .card a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.employer-cards .card a:hover {
+    text-decoration: underline;
+}
