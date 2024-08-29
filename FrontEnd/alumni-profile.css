@@ -1,3 +1,7 @@
+html{
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: whitesmoke;
@@ -11,12 +15,17 @@ body {
 }
 
 .sidebar {
-    width: 200px;
+    width: 19rem;
     background-color: white;
-    padding: 20px;
+    padding: 2rem;
+    /* padding-top: 3rem; */
     position: fixed;
-    height: 100vh;
+    left: 2rem;
+    top: 4.5rem;
+    height: 40rem;
+    /* height: 100vh; */
     border: 2px solid grey;
+    /* border-radius: 1rem; */
 }
 
 .logo h1 {
@@ -209,6 +218,8 @@ a{
     background-color: goldenrod;
     padding: 10px;
     margin: 0px;
+    border-top-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
 }
 .story-container{
     background-color: goldenrod;

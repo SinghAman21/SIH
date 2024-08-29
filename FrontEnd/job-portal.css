@@ -1,7 +1,11 @@
 nav{
-    background-color: #021526;
+    /* background-color: #021526; */
     z-index: 1;
     color: white;
+}
+
+.dark{
+    background-color: #021526;
 }
 .logo{
     background: #7FA1C3;
