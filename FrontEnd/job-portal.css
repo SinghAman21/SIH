@@ -82,16 +82,18 @@ button a{
     color: white;
 } 
 .employer-cards {
-    display: flex;
-    justify-content: space-between;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
 }
 
 .employer-cards .card {
     background: #f4f4f4;
     padding: 20px;
-    width: 30%;
+    width: 100%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: left;
+
 }
 
 .employer-cards .card img {
@@ -115,4 +117,8 @@ button a{
 
 .employer-cards .card a:hover {
     text-decoration: underline;
+}
+button{
+    background-color: #7FA1C3;
+    width: 40%;
 }

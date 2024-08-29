@@ -21,12 +21,3 @@ $(".container .panel").mouseenter(function() {
   $(this).removeClass("hover");
 });
 
- //Smooth Scroll (gets break due to parallax scrolling)
- document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-   anchor.addEventListener('click', function(e) {
-     e.preventDefault();
-     document.querySelector(this.getAttribute('href')).scrollIntoView({
-       behavior: 'smooth'
-     });
-   });
- });
