@@ -37,3 +37,26 @@ let changeto3=() =>{
 btn2.addEventListener("click", changeto2)
 btn1.addEventListener("click", changeto1)
 btn3.addEventListener("click", changeto3)
+
+document.getElementById('logbtn').addEventListener('click', async () => {
+    const email = document.getElementById('mail').value;
+    const password = document.getElementById('pass').value;
+    
+    const response = await fetch('/login/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+    });
+    
+    if (response.ok) {
+        const data = await response.json();
+        alert('Login successful!');
+        console.log(data);
+    } else {
+        const error = await response.json();
+        alert('Login failed: ' + error.detail[0].msg);
+        console.log(error);
+    }
+});
