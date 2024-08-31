@@ -36,8 +36,8 @@
         position: relative;
         border: 2px solid #ddd;
         border-color: #007bff; /* Add a border color */
-        overflow-y: scroll; /* or 'auto' */
-        scrollbar-width: none; /* Firefox */
+        /* overflow-y: scroll; or 'auto' */
+        /* scrollbar-width: none; Firefox */
       }
 
       .gallery-panel:hover {
@@ -47,11 +47,11 @@
 
       .cover-page {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #007bff; /* Cover page background color */
+        top: -1rem;
+        left: -1rem;
+        width: 100%; /* Make sure it covers the full width of the parent */
+        height: 100%; /* Make sure it covers the full height of the parent */
+        background: #007bff; /* Optional: cover page background color */
         color: #ffffff; /* Cover page text color */
         display: flex;
         justify-content: center;
@@ -62,6 +62,12 @@
         z-index: 1;
         padding: 1rem;
         pointer-events: none; /* Prevents interaction when input is needed */
+      }
+
+      #cover {
+        width: 100%; /* Make the image take the full width */
+        height: 100%; /* Make the image take the full height */
+        object-fit: cover; /* Ensures the image covers the container */
       }
 
       .gallery-panel:hover .cover-page {
@@ -317,26 +323,26 @@
       }
 
       input[type="date"] {
-        padding-left: 1rem; 
+        padding-left: 1rem;
         padding-right: 1rem;
       }
 
-      .custom-dropdown{
+      .custom-dropdown {
         height: 2rem;
         border-radius: 4rem;
       }
 
-      .major{
-       position: relative; 
-       top: 2rem;
-       color: red;
+      .major {
+        position: relative;
+        top: 2rem;
+        color: red;
       }
-      footer{
+      footer {
         /* align-items: center; */
         text-align: center;
       }
 
-      .btn-grp{
+      .btn-grp {
         display: flex;
         flex-direction: column;
       }
@@ -347,38 +353,12 @@
       <!-- Basic Information Panel -->
       <div class="gallery-panel">
         <div class="cover-page">
-          <div>
-            <h2>Set Password</h2>
-            <p>
-                Enter your email id,phone number and set your password.
-            </p>
-          </div>
+          <img src="/FrontEnd/img/1.png" id="cover" alt="" />
         </div>
         <div class="form-content">
           <form action="">
             <h2>Set Password</h2>
-            <!-- <div class="form__group field">
-              <input
-                type="input"
-                class="form__field"
-                placeholder="Full Name"
-                id="name"
-                name="fullName"
-                required
-              />
-              <label for="fullName" class="form__label">Full Name</label>
-            </div> -->
-    
-            <!-- <label for="gender">Gender:</label>
-            <select id="gender" name="gender" required>
-              <option class="custom-option" value="male">Male</option>
-              <option class="custom-option" value="female">Female</option>
-              <option class="custom-option" value="other">Other</option>
-            </select>
-    
-            <label for="dob">Date of Birth:</label>
-            <input type="date" id="date_of_birth" name="dob" required /> -->
-    
+
             <div class="form__group field">
               <input
                 type="input"
@@ -390,7 +370,7 @@
               />
               <label for="phone" class="form__label">Phone Number</label>
             </div>
-    
+
             <div class="form__group field">
               <input
                 type="input"
@@ -404,20 +384,20 @@
             </div>
 
             <div class="form__group field">
-                <input
-                  type="password"
-                  class="form__field"
-                  placeholder="Email Address"
-                  id="email"
-                  name="email"
-                  required
-                />
-                <label for="email" class="form__label">Set Password</label>
-              </div>
-              <br>  
-              <button data-label="Register" class="rainbow-hover">
-                <span class="sp">Confirm</span>
-              </button>
+              <input
+                type="password"
+                class="form__field"
+                placeholder="Email Address"
+                id="email"
+                name="email"
+                required
+              />
+              <label for="email" class="form__label">Set Password</label>
+            </div>
+            <br />
+            <button data-label="Register" class="rainbow-hover">
+              <span class="sp">Confirm</span>
+            </button>
             <!-- <label for="address">Current Address:</label>
             <textarea id="address" name="address" rows="3" required></textarea> -->
           </form>
@@ -425,13 +405,9 @@
       </div>
       <div class="gallery-panel">
         <div class="cover-page">
-          <div>
-            <h2>Basic Information</h2>
-            <p>
-              Enter your full name, gender, date of birth, contact details, and
-              current address.
-            </p>
-          </div>
+            <div class="cover-page">
+                <img src="/FrontEnd/img/2.png" id="cover" alt="" />
+              </div>
         </div>
         <div class="form-content">
           <form action="">
@@ -447,17 +423,17 @@
               />
               <label for="fullName" class="form__label">Full Name</label>
             </div>
-    
+
             <label for="gender">Gender:</label>
             <select id="gender" name="gender" required>
               <option class="custom-option" value="male">Male</option>
               <option class="custom-option" value="female">Female</option>
               <option class="custom-option" value="other">Other</option>
             </select>
-    
+
             <label for="dob">Date of Birth:</label>
             <input type="date" id="date_of_birth" name="dob" required />
-    
+
             <!-- <div class="form__group field">
               <input
                 type="input"
@@ -481,31 +457,27 @@
               />
               <label for="email" class="form__label">Email Address</label>
             </div> -->
-    
+
             <label for="address">Current Address:</label>
             <textarea id="address" name="address" rows="3" required></textarea>
           </form>
         </div>
       </div>
-    
+
       <!-- Educational Background Panel -->
       <div class="gallery-panel">
         <div class="cover-page">
-          <div>
-            <h2>Educational Background</h2>
-            <p>
-              Provide information about your institution, degrees earned, graduation
-              year, and major.
-            </p>
-          </div>
+            <div class="cover-page">
+                <img src="/FrontEnd/img/3.png" id="cover" alt="" />
+              </div>
         </div>
         <div class="form-content">
           <form action="">
             <h2>Educational Background</h2>
-    
+
             <div class="form__group field">
               <!-- <label for="institution" class="form__label">Who are you?</label> -->
-    
+
               <div class="toggle-container">
                 <span class="toggle-text">Student</span>
                 <div class="toggle-switch">
@@ -514,7 +486,7 @@
                 </div>
                 <span class="toggle-text">Alumni</span>
               </div>
-    
+
               <div class="form__group field">
                 <input
                   type="input"
@@ -524,11 +496,14 @@
                   name="institution"
                   required
                 />
-                <label for="institution" class="form__label" style="position: absolute;"
+                <label
+                  for="institution"
+                  class="form__label"
+                  style="position: absolute"
                   >Institution</label
                 >
               </div>
-    
+
               <div class="form__group field">
                 <input
                   type="input"
@@ -538,11 +513,9 @@
                   name="degree"
                   required
                 />
-                <label for="degree" class="form__label"
-                  >Degree</label
-                >
+                <label for="degree" class="form__label">Degree</label>
               </div>
-    
+
               <div class="student" id="student">
                 <br />
                 <label for="year">Year:</label>
@@ -553,7 +526,7 @@
                   <option value="be">Fourth Year</option>
                 </select>
               </div>
-    
+
               <div class="alumini" id="alumni">
                 <div class="form__group field">
                   <input
@@ -570,8 +543,13 @@
                 </div>
               </div>
               <div class="form__group field">
-                <label for="major_field_of_study" class="form__label" style="position: absolute; top: 1rem;">Major:</label>
-                <br>
+                <label
+                  for="major_field_of_study"
+                  class="form__label"
+                  style="position: absolute; top: 1rem"
+                  >Major:</label
+                >
+                <br />
                 <select
                   id="major_field_of_study"
                   name="major"
@@ -584,8 +562,12 @@
                   <option value="civil">Civil</option>
                   <option value="other">Other</option>
                 </select>
-    
-                <div class="other_major_container" id="other_major_container" style="display: none;">
+
+                <div
+                  class="other_major_container"
+                  id="other_major_container"
+                  style="display: none"
+                >
                   <input
                     type="text"
                     id="major_field_of_study"
@@ -598,30 +580,36 @@
               </div>
               <br />
 
-              <div class="alumni" id="upload" style="display: none;">
+              <div class="alumni" id="upload" style="display: none">
                 <div class="btn-grp">
-              <input type="file" id="fileInput" accept="pdf" class="rainbow-hover" data-label="Register"/>        
-              <!-- <button onclick="uploadPDF()">Upload PDF</button> -->
-              <button data-label="Register" class="rainbow-hover" onclick="uploadPDF()">
-                <span class="sp">Upload PDF</span>
-              </button>
-            </div>
-            </div>
+                  <input
+                    type="file"
+                    id="fileInput"
+                    accept="pdf"
+                    class="rainbow-hover"
+                    data-label="Register"
+                  />
+                  <!-- <button onclick="uploadPDF()">Upload PDF</button> -->
+                  <button
+                    data-label="Register"
+                    class="rainbow-hover"
+                    onclick="uploadPDF()"
+                  >
+                    <span class="sp">Upload PDF</span>
+                  </button>
+                </div>
+              </div>
             </div>
           </form>
         </div>
       </div>
-    
+
       <!-- Work Experience Panel -->
       <div class="gallery-panel">
         <div class="cover-page">
-          <div>
-            <h2>Work Experience</h2>
-            <p>
-              List your work experiences, including job titles, companies, employment
-              dates, and responsibilities.
-            </p>
-          </div>
+            <div class="cover-page">
+                <img src="/FrontEnd/img/4.png" id="cover" alt="" />
+              </div>
         </div>
         <div class="form-content">
           <form action="">
@@ -637,7 +625,7 @@
               />
               <label for="jobTitle" class="form__label">Job Title</label>
             </div>
-    
+
             <div class="form__group field">
               <input
                 type="input"
@@ -651,17 +639,19 @@
             </div>
 
             <div class="form__group field">
-                <input
-                  type="input"
-                  class="form__field"
-                  placeholder="Company"
-                  id="professional_field"
-                  name="company"
-                  required
-                />
-                <label for="company" class="form__label">Proffesional Field</label>
-              </div>
-    
+              <input
+                type="input"
+                class="form__field"
+                placeholder="Company"
+                id="professional_field"
+                name="company"
+                required
+              />
+              <label for="company" class="form__label"
+                >Proffesional Field</label
+              >
+            </div>
+
             <!-- <label for="responsibilities">Work Experience:</label>
             <textarea
               id="work_experience"
@@ -669,14 +659,14 @@
               rows="3"
               required
             ></textarea> -->
-            <br>
+            <br />
             <button data-label="Register" class="rainbow-hover">
-                <span class="sp">Register</span>
-              </button>
+              <span class="sp">Register</span>
+            </button>
           </form>
         </div>
       </div>
-    
+
       <!-- Skills Panel -->
       <!-- <div class="gallery-panel">
         <div class="cover-page">
@@ -712,71 +702,70 @@
     <footer>
       <span>Already have an account? <a href="login.html">Login</a></span>
     </footer>
-    
-        
+
     <!-- <button data-label="Register" class="rainbow-hover">
       <span class="sp">Register</span>
     </button> -->
   </body>
   <script>
     function toggleContent() {
-  const toggleInput = document.getElementById("toggle");
-  const studentDiv = document.getElementById("student");
-  const alumniDiv = document.getElementById("alumni");
-  const upload = document.getElementById("upload");
+      const toggleInput = document.getElementById("toggle");
+      const studentDiv = document.getElementById("student");
+      const alumniDiv = document.getElementById("alumni");
+      const upload = document.getElementById("upload");
 
-  // Check if the toggle is checked
-  if (toggleInput.checked) {
-    // Show Alumni div and hide Student div
-    studentDiv.style.display = "none";
-    alumniDiv.style.display = "block";
-    upload.style.display = "block";
-  } else {
-    // Show Student div and hide Alumni div
-    studentDiv.style.display = "block";
-    alumniDiv.style.display = "none";
-    upload.style.display = "none"; 
-  }
-}
-
-// Add event listener to the toggle switch
-document.getElementById("toggle").addEventListener("change", toggleContent);
-
-// Initial check to set the correct div visibility
-toggleContent();
-
-document.addEventListener("DOMContentLoaded", function() {
-  const majorField = document.getElementById("major_field_of_study");
-  const otherMajorContainer = document.getElementById("other_major_container");
-
-  majorField.addEventListener("change", function() {
-    if (majorField.value === "other") {
-      otherMajorContainer.style.display = "block"; // Show the input field
-    } else {
-      otherMajorContainer.style.display = "none"; // Hide the input field
+      // Check if the toggle is checked
+      if (toggleInput.checked) {
+        // Show Alumni div and hide Student div
+        studentDiv.style.display = "none";
+        alumniDiv.style.display = "block";
+        upload.style.display = "block";
+      } else {
+        // Show Student div and hide Alumni div
+        studentDiv.style.display = "block";
+        alumniDiv.style.display = "none";
+        upload.style.display = "none";
+      }
     }
-  });
-});
 
+    // Add event listener to the toggle switch
+    document.getElementById("toggle").addEventListener("change", toggleContent);
 
+    // Initial check to set the correct div visibility
+    toggleContent();
 
-  function uploadPDF() {
-    const fileInput = document.getElementById('fileInput');
-    const file = fileInput.files[0];
+    document.addEventListener("DOMContentLoaded", function () {
+      const majorField = document.getElementById("major_field_of_study");
+      const otherMajorContainer = document.getElementById(
+        "other_major_container"
+      );
 
-    if (file && file.type === 'application/pdf') {
+      majorField.addEventListener("change", function () {
+        if (majorField.value === "other") {
+          otherMajorContainer.style.display = "block"; // Show the input field
+        } else {
+          otherMajorContainer.style.display = "none"; // Hide the input field
+        }
+      });
+    });
+
+    function uploadPDF() {
+      const fileInput = document.getElementById("fileInput");
+      const file = fileInput.files[0];
+
+      if (file && file.type === "application/pdf") {
         const reader = new FileReader();
 
-        reader.onload = function(e) {
-            const base64String = e.target.result.split(',')[1]; // Extract base64 part
-            localStorage.setItem('uploadedPDF', base64String);
-            alert('PDF uploaded to local storage!');
+        reader.onload = function (e) {
+          const base64String = e.target.result.split(",")[1]; // Extract base64 part
+          localStorage.setItem("uploadedPDF", base64String);
+          alert("PDF uploaded to local storage!");
         };
 
         reader.readAsDataURL(file);
-    } else {
-        alert('Please upload a valid PDF file.');
+      } else {
+        alert("Please upload a valid PDF file.");
+      }
     }
-}
   </script>
 </html>
