@@ -185,11 +185,13 @@ a{
   margin: 50px auto;
   padding: 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-image: url('./img/contact.png');
+  background-image: url(../img/contact.png);
   background-size: cover; /* This makes the background image cover the entire area */
   background-repeat: no-repeat; /* Prevents the image from repeating */
   background-attachment: fixed; /* Keeps the image fixed when scrolling */
   background-position: center; 
+  /*background-color: #021526;
+  color: white;*/
 }
 .ccontainer>a{
   text-decoration: none;
